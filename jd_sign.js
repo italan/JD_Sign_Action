@@ -80,7 +80,7 @@ function sendNotificationIfNeed() {
   let SCKEY = bark_key.replace(/[\r\n]/g,"")
   
   const options ={
-    uri:  `http://api.day.app/${SCKEY}/${text}/${desp}`,
+    uri:  `https://api.day.app/${SCKEY}/text/desp`,
     method: 'GET',
     headers: {
       "Content-type": "application/x-www-form-urlencoded"
