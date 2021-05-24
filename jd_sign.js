@@ -97,6 +97,7 @@ function sendNotificationIfNeed() {
     }
   }).catch((err)=>{
     console.log("通知发送失败（错误），任务中断！")
+    console.log(err)
     fs.writeFileSync(error_path, err, 'utf8')
   })
   
@@ -137,9 +138,9 @@ function main() {
   // 1、下载脚本
   download(js_url, './').then(res=>{
     // 2、替换cookie
-    setupCookie()
+    //setupCookie()
     // 3、执行脚本
-    exec(`node '${js_path}' >> '${result_path}'`);
+    //exec(`node '${js_path}' >> '${result_path}'`);
     // 4、发送推送
     sendNotificationIfNeed() 
   }).catch((err)=>{
