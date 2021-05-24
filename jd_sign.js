@@ -13,6 +13,8 @@ const cookie = process.env.JD_COOKIE
 const dual_cookie = process.env.JD_DUAL_COOKIE
 // Server酱SCKEY
 const push_key = process.env.PUSH_KEY
+// Bark通知SCKEY
+const bark_key = process.env.BARK_KEY
 
 // 京东脚本文件
 const js_url = 'https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js'
@@ -73,7 +75,34 @@ function sendNotificationIfNeed() {
 
   let text = "京东签到_" + dateFormat();
   let desp = fs.readFileSync(result_path, "utf8")
+  
+  // 去除末尾的换行
+  let SCKEY = bark_key.replace(/[\r\n]/g,"")
+  
+  const options ={
+    uri:  `http://api.day.app/${SCKEY}/${text}/${desp}`,
+    method: 'GET',
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded"
+    }
+  }
 
+  rp.post(options).then(res=>{
+    const code = res['code'];
+    if (code == 200) {
+      console.log("通知发送成功，任务结束！")
+    }
+    else {
+      console.log(res);
+      console.log("通知发送失败，任务中断！")
+      fs.writeFileSync(error_path, JSON.stringify(res), 'utf8')
+    }
+  }).catch((err)=>{
+    console.log("通知发送失败，任务中断！")
+    fs.writeFileSync(error_path, err, 'utf8')
+  })
+  
+  /*
   // 去除末尾的换行
   let SCKEY = push_key.replace(/[\r\n]/g,"")
 
@@ -98,6 +127,7 @@ function sendNotificationIfNeed() {
     console.log("通知发送失败，任务中断！")
     fs.writeFileSync(error_path, err, 'utf8')
   })
+  */
 }
 
 function main() {
