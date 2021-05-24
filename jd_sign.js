@@ -85,7 +85,7 @@ function sendNotificationIfNeed() {
     }
   }
 
-  rp.post(options).then(res=>{
+  rp(options).then(res=>{
     const code = res['code'];
     if (code == 200) {
       console.log("通知发送成功，任务结束！")
@@ -96,7 +96,7 @@ function sendNotificationIfNeed() {
       fs.writeFileSync(error_path, JSON.stringify(res), 'utf8')
     }
   }).catch((err)=>{
-    console.log("通知发送失败，任务中断！")
+    console.log("通知发送失败（错误），任务中断！")
     fs.writeFileSync(error_path, err, 'utf8')
   })
   
