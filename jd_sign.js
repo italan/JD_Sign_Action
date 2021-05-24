@@ -68,11 +68,13 @@ function sendNotificationIfNeed() {
   }
 
   if (!fs.existsSync(result_path)) {
-    console.log('没有执行结果，任务中断!'); return;
+    //console.log('没有执行结果，任务中断!'); return;
   }
 
+  //let text = "京东签到_" + dateFormat();
+  //let desp = fs.readFileSync(result_path, "utf8")
   let text = "京东签到_" + dateFormat();
-  let desp = fs.readFileSync(result_path, "utf8")
+  let desp = "测试正文"
   
   // 去除末尾的换行
   let SCKEY = push_key.replace(/[\r\n]/g,"")
