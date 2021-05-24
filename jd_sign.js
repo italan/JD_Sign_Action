@@ -74,6 +74,7 @@ function sendNotificationIfNeed() {
   let text = "京东签到_" + dateFormat();
   let desp = fs.readFileSync(result_path, "utf8")
   
+  /*
   // 去除末尾的换行
   let SCKEY = push_key.replace(/[\r\n]/g,"")
   
@@ -100,8 +101,8 @@ function sendNotificationIfNeed() {
     console.log(err)
     fs.writeFileSync(error_path, err, 'utf8')
   })
+  */
   
-  /*
   // 去除末尾的换行
   let SCKEY = push_key.replace(/[\r\n]/g,"")
 
@@ -123,10 +124,11 @@ function sendNotificationIfNeed() {
       fs.writeFileSync(error_path, JSON.stringify(res), 'utf8')
     }
   }).catch((err)=>{
-    console.log("通知发送失败，任务中断！")
+    console.log("通知发送失败（错误），任务中断！")
+    console.log(err)
     fs.writeFileSync(error_path, err, 'utf8')
   })
-  */
+  
 }
 
 function main() {
