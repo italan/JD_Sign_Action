@@ -80,7 +80,7 @@ function sendNotificationIfNeed() {
   let SCKEY = push_key.replace(/[\r\n]/g,"")
   
   const options ={
-    uri:  `https://api.day.app/${SCKEY}/${text}/${desp}`,
+    uri:  encodeURI(`https://api.day.app/${SCKEY}/${text}/${desp}`),
     method: 'GET',
     headers: {
       "Content-type": "application/x-www-form-urlencoded"
