@@ -71,10 +71,8 @@ function sendNotificationIfNeed() {
     //console.log('没有执行结果，任务中断!'); return;
   }
 
-  //let text = "京东签到_" + dateFormat();
-  //let desp = fs.readFileSync(result_path, "utf8")
   let text = "京东签到_" + dateFormat();
-  let desp = "测试正文"
+  let desp = fs.readFileSync(result_path, "utf8")
   
   // 去除末尾的换行
   let SCKEY = push_key.replace(/[\r\n]/g,"")
@@ -140,9 +138,9 @@ function main() {
   // 1、下载脚本
   download(js_url, './').then(res=>{
     // 2、替换cookie
-    //setupCookie()
+    setupCookie()
     // 3、执行脚本
-    //exec(`node '${js_path}' >> '${result_path}'`);
+    exec(`node '${js_path}' >> '${result_path}'`);
     // 4、发送推送
     sendNotificationIfNeed() 
   }).catch((err)=>{
